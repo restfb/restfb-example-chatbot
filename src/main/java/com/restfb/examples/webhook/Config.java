@@ -8,6 +8,7 @@ package com.restfb.examples.webhook;
 import org.eclipse.jetty.util.log.Log;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
@@ -16,7 +17,12 @@ public class Config {
 
   private Config() {
     try {
-      properties.load(Config.class.getResourceAsStream("config.properties"));
+      InputStream configStream = Config.class.getResourceAsStream("config.properties");
+      if (configStream != null) {
+        properties.load(configStream);
+      } else {
+        Log.getLog().warn("could not load config.properties");
+      }
     } catch (IOException ioe) {
       Log.getLog().warn("could not load config.properties", ioe);
     }
