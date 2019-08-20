@@ -1,0 +1,27 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>logbot</servlet-name>
+    <servlet-class>com.restfb.examples.webhook.bots.LogBotServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>logbot</servlet-name>
+    <url-pattern>/log</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>echobot</servlet-name>
+    <servlet-class>com.restfb.examples.webhook.bots.EchoBotServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>echobot</servlet-name>
+    <url-pattern>/echo</url-pattern>
+  </servlet-mapping>
+</web-app>

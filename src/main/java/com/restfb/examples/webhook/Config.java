@@ -5,7 +5,8 @@
  */
 package com.restfb.examples.webhook;
 
-import org.eclipse.jetty.util.log.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,16 +16,18 @@ public class Config {
 
   Properties properties = new Properties();
 
+  private static final Logger LOGGER = LogManager.getLogger(Config.class);
+
   private Config() {
     try {
       InputStream configStream = Config.class.getResourceAsStream("config.properties");
       if (configStream != null) {
         properties.load(configStream);
       } else {
-        Log.getLog().warn("could not load config.properties");
+        LOGGER.warn("could not load config.properties");
       }
     } catch (IOException ioe) {
-      Log.getLog().warn("could not load config.properties", ioe);
+      LOGGER.warn("could not load config.properties", ioe);
     }
   }
 
@@ -38,7 +41,7 @@ public class Config {
 
   /**
    * get the verify token for the chatbot webhook
-   * 
+   *
    * @return String representing the verify token
    */
   public String getBotTokenVerify() {
@@ -52,23 +55,5 @@ public class Config {
    */
   public String getBotTokenAccess() {
     return properties.getProperty("bot.token.access");
-  }
-
-  /**
-   * get the ip of the chatbot example server
-   *
-   * @return the host ip
-   */
-  public String getServerHost() {
-    return properties.getProperty("server.host");
-  }
-
-  /**
-   * get the port of the chatbot example server
-   *
-   * @return the port of the chatbot server as int
-   */
-  public int getServerPort() {
-    return Integer.valueOf(properties.getProperty("server.port"));
   }
 }

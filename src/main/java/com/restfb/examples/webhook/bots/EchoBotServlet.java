@@ -16,6 +16,8 @@ import com.restfb.types.webhook.WebhookObject;
 import com.restfb.types.webhook.messaging.MessagingItem;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,11 +48,10 @@ public class EchoBotServlet extends AbstractFacebookBotServlet {
         // send response if it is a message and not send a "echo"
         if (simpleTextMessage != null && !item.getMessage().isEcho()) {
           final FacebookClient sendClient =
-              new DefaultFacebookClient(Config.getInstance().getBotTokenAccess(), Version.VERSION_2_7);
+                  new DefaultFacebookClient(Config.getInstance().getBotTokenAccess(), Version.LATEST);
           sendClient.publish("me/messages", GraphResponse.class, Parameter.with("recipient", recipient),
-            Parameter.with("message", simpleTextMessage));
+                  Parameter.with("message", simpleTextMessage));
         }
-
       }
     }
   }
